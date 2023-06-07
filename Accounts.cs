@@ -16,9 +16,9 @@ namespace From_Hungary_for_hungry
             None
         }
 
-        public string id = "";
-        public string username = "";
-        public string password = "";
+        public string id;
+        public string username;
+        public string password;
         public UserType type = UserType.None;
     }
 }
