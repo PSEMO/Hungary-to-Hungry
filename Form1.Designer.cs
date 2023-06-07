@@ -48,10 +48,10 @@
             LoginLabel.Anchor = AnchorStyles.Top;
             LoginLabel.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             LoginLabel.ForeColor = Color.White;
-            LoginLabel.Location = new Point(0, 21);
+            LoginLabel.Location = new Point(0, 28);
             LoginLabel.Margin = new Padding(0);
             LoginLabel.Name = "LoginLabel";
-            LoginLabel.Size = new Size(200, 39);
+            LoginLabel.Size = new Size(229, 52);
             LoginLabel.TabIndex = 0;
             LoginLabel.Text = "Login";
             LoginLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -62,10 +62,11 @@
             textBox1.AccessibleDescription = "";
             textBox1.AccessibleName = "";
             textBox1.Anchor = AnchorStyles.Top;
-            textBox1.Location = new Point(50, 80);
+            textBox1.Location = new Point(57, 107);
+            textBox1.Margin = new Padding(3, 4, 3, 4);
             textBox1.Name = "textBox1";
             textBox1.PlaceholderText = "Your mail";
-            textBox1.Size = new Size(100, 23);
+            textBox1.Size = new Size(114, 27);
             textBox1.TabIndex = 1;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
@@ -76,12 +77,12 @@
             panel1.Controls.Add(checkBox1);
             panel1.Controls.Add(button1);
             panel1.Controls.Add(textBox2);
-            panel1.Controls.Add(textBox1);
             panel1.Controls.Add(LoginLabel);
-            panel1.Location = new Point(300, 40);
+            panel1.Controls.Add(textBox1);
+            panel1.Location = new Point(343, 53);
             panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(200, 250);
+            panel1.Size = new Size(229, 333);
             panel1.TabIndex = 2;
             panel1.Visible = false;
             // 
@@ -91,10 +92,10 @@
             checkBox1.AutoSize = true;
             checkBox1.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
             checkBox1.ForeColor = Color.Aqua;
-            checkBox1.Location = new Point(40, 206);
+            checkBox1.Location = new Point(46, 275);
             checkBox1.Margin = new Padding(0);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(120, 17);
+            checkBox1.Size = new Size(143, 23);
             checkBox1.TabIndex = 4;
             checkBox1.Text = "Keep me signed in";
             checkBox1.UseVisualStyleBackColor = true;
@@ -105,10 +106,10 @@
             button1.Anchor = AnchorStyles.Top;
             button1.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
             button1.ForeColor = Color.Black;
-            button1.Location = new Point(60, 164);
+            button1.Location = new Point(69, 219);
             button1.Margin = new Padding(0);
             button1.Name = "button1";
-            button1.Size = new Size(80, 20);
+            button1.Size = new Size(91, 27);
             button1.TabIndex = 3;
             button1.Text = "OK";
             button1.UseVisualStyleBackColor = true;
@@ -117,10 +118,11 @@
             // textBox2
             // 
             textBox2.Anchor = AnchorStyles.Top;
-            textBox2.Location = new Point(50, 120);
+            textBox2.Location = new Point(57, 160);
+            textBox2.Margin = new Padding(3, 4, 3, 4);
             textBox2.Name = "textBox2";
             textBox2.PlaceholderText = "Your password";
-            textBox2.Size = new Size(100, 23);
+            textBox2.Size = new Size(114, 27);
             textBox2.TabIndex = 2;
             textBox2.UseSystemPasswordChar = true;
             textBox2.TextChanged += textBox2_TextChanged;
@@ -131,18 +133,20 @@
             panel2.BackColor = Color.FromArgb(64, 64, 64);
             panel2.Controls.Add(button3);
             panel2.Controls.Add(button2);
-            panel2.Location = new Point(200, 100);
+            panel2.Location = new Point(229, 133);
+            panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(440, 120);
+            panel2.Size = new Size(503, 160);
             panel2.TabIndex = 3;
             // 
             // button3
             // 
             button3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             button3.Font = new Font("Segoe UI", 23F, FontStyle.Regular, GraphicsUnit.Point);
-            button3.Location = new Point(220, 30);
+            button3.Location = new Point(251, 40);
+            button3.Margin = new Padding(3, 4, 3, 4);
             button3.Name = "button3";
-            button3.Size = new Size(197, 60);
+            button3.Size = new Size(225, 80);
             button3.TabIndex = 2;
             button3.Text = "Login";
             button3.UseVisualStyleBackColor = true;
@@ -152,9 +156,10 @@
             // 
             button2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             button2.Font = new Font("Segoe UI", 23F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.Location = new Point(23, 30);
+            button2.Location = new Point(26, 40);
+            button2.Margin = new Padding(3, 4, 3, 4);
             button2.Name = "button2";
-            button2.Size = new Size(197, 60);
+            button2.Size = new Size(225, 80);
             button2.TabIndex = 1;
             button2.Text = "Register";
             button2.UseVisualStyleBackColor = true;
@@ -163,9 +168,10 @@
             // button4
             // 
             button4.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            button4.Location = new Point(12, 12);
+            button4.Location = new Point(14, 16);
+            button4.Margin = new Padding(3, 4, 3, 4);
             button4.Name = "button4";
-            button4.Size = new Size(50, 50);
+            button4.Size = new Size(57, 67);
             button4.TabIndex = 0;
             button4.Text = "<";
             button4.UseVisualStyleBackColor = true;
@@ -174,14 +180,15 @@
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkGray;
-            ClientSize = new Size(784, 361);
+            ClientSize = new Size(896, 481);
             Controls.Add(button4);
             Controls.Add(panel1);
             Controls.Add(panel2);
-            MinimumSize = new Size(800, 398);
+            Margin = new Padding(3, 4, 3, 4);
+            MinimumSize = new Size(912, 518);
             Name = "Form1";
             Text = "Form1";
             panel1.ResumeLayout(false);
