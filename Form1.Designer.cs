@@ -76,8 +76,8 @@
             panel1.Controls.Add(checkBox1);
             panel1.Controls.Add(button1);
             panel1.Controls.Add(textBox2);
-            panel1.Controls.Add(LoginLabel);
             panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(LoginLabel);
             panel1.Location = new Point(300, 40);
             panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
@@ -181,7 +181,7 @@
             Controls.Add(button4);
             Controls.Add(panel1);
             Controls.Add(panel2);
-            MinimumSize = new Size(800, 400);
+            MinimumSize = new Size(800, 398);
             Name = "Form1";
             Text = "Form1";
             panel1.ResumeLayout(false);

@@ -1,3 +1,6 @@
+using System.Data.SqlClient;
+using System.Security.Cryptography;
+using System.Text;
 using System.Xml.Serialization;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
@@ -13,6 +16,10 @@ namespace From_Hungary_for_hungry
         {
             InitializeComponent();
         }
+
+        //db connection string
+        public static string dbconnection = "Data Source=DESKTOP-2EBNC0D\\SQLEXPRESS;Initial Catalog=hthDB;Integrated Security=True";
+        SqlConnection con = new SqlConnection(dbconnection);
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -93,6 +100,18 @@ namespace From_Hungary_for_hungry
             }
         }
 
+        private static string HashPassword(string password)
+        {
+            //method for hashing password to secure accounts
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
+                byte[] hashBytes = sha256.ComputeHash(passwordBytes);
+                string hashedPassword = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+                return hashedPassword;
+            }
+        }
+
         bool isMailValid(string mail)
         {
             var trimmedEmail = mail.Trim();
@@ -127,33 +146,145 @@ namespace From_Hungary_for_hungry
             {
                 //add strings to save file
                 //Register
+
+                //Hash the password
+                string hashedPassword = HashPassword(password);
+
+                string q = "INSERT INTO tb_accounts (email, password, type, membershipStatus) VALUES (@email, @password, 'Customer', 'false')";
+
+                using (SqlCommand command = new SqlCommand(q, con))
+                {
+                    command.Parameters.AddWithValue("@email", mail);
+                    command.Parameters.AddWithValue("@password", password);
+
+                    con.Open();
+                    command.ExecuteNonQuery();
+                }
+
+                MessageBox.Show("User created successfully!");
+
+                isRegistering = false;
+                NextPage();
+                con.Close();
+
             }
         }
+
+        string GetUserAccountType(string mail)
+        {
+            string accountType = "Customer";
+
+            // Query the database to get the account type based on the email
+            string q = "SELECT type FROM tb_accounts WHERE email = @email";
+
+            using (SqlCommand command = new SqlCommand(q, con))
+            {
+                command.Parameters.AddWithValue("@email", mail);
+
+                con.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        accountType = reader["type"].ToString();
+                    }
+                }
+
+                con.Close();
+            }
+
+            return accountType;
+        }
+
 
         void Login(string mail, string password)
         {
             if (UserAndMailMatches(mail, password))
             {
                 //Login
-                //Get user location according to saved infos
+                // Determine the account type of the logged-in user
+                string accountType = GetUserAccountType(mail);
+
+                // Redirect to different forms based on the account type
+                if (accountType == "Customer")
+                {
+                    MessageBox.Show("Login successful!");
+                    // Redirect to customer form
+                    CustomerForm customerForm = new CustomerForm();
+                    this.Hide();
+                    customerForm.Show();
+                }
+                else if (accountType == "Admin")
+                {
+                    MessageBox.Show("Login successful!");
+                    // Redirect to admin form
+                    AdminForm adminForm = new AdminForm();
+                    this.Hide();
+                    adminForm.Show();
+                }
+                else if (accountType == "Restaurant")
+                {
+                    //MessageBox.Show("Login successful!");
+                    // Redirect to restaurant form
+                    /*RestaurantForm restaurantForm = new RestaurantForm();
+                     * this.Hide();
+                    restaurantForm.Show();*/
+                }
+                else
+                {
+                    // Invalid or unrecognized account type
+                    MessageBox.Show("Invalid account type! Please contact support.");
+                }
+
             }
             else
             {
                 //Show error
                 //Show up a error message and say mail or password is wrong
+                MessageBox.Show("Mail or password is wrong!! Try again.");
             }
         }
 
         bool UserWithMailExists(string mail)
         {
             //see if it has a legitimed @ and .com combination
-            return false;
+
+            // Query the database to check if a user with the given email exists
+            string q = "SELECT COUNT(*) FROM tb_accounts WHERE email = @email";
+            int count = 0;
+
+            using (SqlCommand command = new SqlCommand(q, con))
+            {
+                command.Parameters.AddWithValue("@email", mail);
+
+                con.Open();
+                count = (int)command.ExecuteScalar();
+                con.Close();
+            }
+
+            // If count is greater than 0, a user with the email already exists
+            return count > 0;
         }
 
         bool UserAndMailMatches(string mail, string password)
         {
             //Check if there is a user with this password and mail exists
-            return true;
+            string q = "SELECT COUNT(*) FROM tb_accounts WHERE email = @email AND password = @password";
+            int count = 0;
+
+            using (SqlCommand command = new SqlCommand(q, con))
+            {
+                command.Parameters.AddWithValue("@email", mail);
+                command.Parameters.AddWithValue("@password", password);
+
+                con.Open();
+                count = (int)command.ExecuteScalar();
+                con.Close();
+            }
+
+            // If count is greater than 0, a user with the email and password exists
+            return count > 0;
         }
 
         //Back button
@@ -238,5 +369,7 @@ namespace From_Hungary_for_hungry
 
         }
         #endregion
+
+
     }
 }

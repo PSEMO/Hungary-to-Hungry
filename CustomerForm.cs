@@ -19,7 +19,30 @@ namespace From_Hungary_for_hungry
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //show selected restaurants menu on the MenuPanel
+            //do it by creating listbox within that panel
+        }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CustomerForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        //Add button
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Add selected products from "created listbox" to a listbox that is in CartPanel
+        }
+
+        //Remove button
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //Remove from the last listbox
         }
     }
 }

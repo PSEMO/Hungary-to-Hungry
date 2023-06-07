@@ -8,6 +8,6 @@ namespace From_Hungary_for_hungry
 {
     internal class Customer : User
     {
-        string telNo;
+        string telNo = "";
     }
 }
